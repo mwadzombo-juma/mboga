@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mama Mboga Kiosk</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- PWA manifest (optional) -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#2ecc71">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon.png">
+  <link rel="apple-touch-icon" href="icons/icon.png">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🥬 Mama Mboga Kiosk</h1>
+    </header>
+
+    <!-- Add Product -->
+    <section class="section card">
+      <h2>Add / Restock Product</h2>
+      <div class="form-row">
+        <input id="inputName" type="text" placeholder="Product name" />
+        <input id="inputBuy" type="number" step="0.01" placeholder="Buying price (Ksh)" />
+        <input id="inputSell" type="number" step="0.01" placeholder="Selling price (Ksh)" />
+        <input id="inputQty" type="number" placeholder="Quantity" />
+        <button id="btnAdd">Add / Restock</button>
+      </div>
+    </section>
+
+    <!-- Record Sale -->
+    <section class="section card">
+      <h2>Record Sale</h2>
+      <div class="form-row">
+        <select id="selectSaleProduct"></select>
+        <input id="inputSaleQty" type="number" placeholder="Quantity sold" />
+        <button id="btnRecordSale">Record Sale</button>
+      </div>
+    </section>
+
+    <!-- Stock List (scrollable) -->
+    <section class="section card">
+      <h2>Stock List</h2>
+      <div class="table-container">
+        <table class="product-table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Stock</th>
+              <th>Selling</th>
+              <th>Buying</th>
+              <th>Sold</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="visibleList"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Hidden products (toggle) -->
+    <section class="section card">
+      <div class="row-between">
+        <h2>Hidden Products (0-stock)</h2>
+        <button id="toggleHiddenBtn" class="small">Show Hidden</button>
+      </div>
+      <div id="hiddenSection" class="table-container hidden">
+        <table class="product-table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Stock</th>
+              <th>Selling</th>
+              <th>Buying</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="hiddenList"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Profit & Controls -->
+    <section class="section card">
+      <h2>Total Profit</h2>
+      <p class="big">KES <span id="profitDisplay">0.00</span></p>
+
+      <div class="form-row">
+        <button id="btnViewProfit">View Profit</button>
+        <button id="btnNewDay">Start New Day</button>
+        <button id="btnBackup">Download Backup</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js').catch(()=>{ /* ignore */ });
+    }
+  </script>
+</body>
+</html>
